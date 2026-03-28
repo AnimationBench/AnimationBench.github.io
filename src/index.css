@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 50% 97%;
+    --foreground: 240 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 20% 15%;
+
+    --primary: 350 75% 62%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 260 50% 72%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 40 30% 93%;
+    --muted-foreground: 240 10% 45%;
+
+    --accent: 165 50% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 40 25% 88%;
+    --input: 40 25% 88%;
+    --ring: 350 75% 62%;
+
+    --radius: 1rem;
+
+    --coral: 350 75% 62%;
+    --lavender: 260 50% 72%;
+    --mint: 165 50% 55%;
+    --peach: 25 90% 75%;
+    --sky: 200 70% 65%;
+    --lemon: 50 85% 70%;
+
+    --glass: 0 0% 100% / 0.65;
+    --glass-border: 0 0% 100% / 0.3;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/70 backdrop-blur-xl border border-border/50 shadow-lg;
+  }
+  .glass-panel {
+    background: hsla(var(--glass));
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(var(--glass-border));
+  }
+  .gradient-coral {
+    background: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--peach)));
+  }
+  .gradient-lavender {
+    background: linear-gradient(135deg, hsl(var(--lavender)), hsl(var(--sky)));
+  }
+  .gradient-mint {
+    background: linear-gradient(135deg, hsl(var(--mint)), hsl(var(--lemon)));
+  }
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--coral) / 0.08) 0%,
+      hsl(var(--lavender) / 0.1) 40%,
+      hsl(var(--mint) / 0.08) 70%,
+      hsl(var(--peach) / 0.06) 100%
+    );
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--coral)), hsl(var(--lavender)));
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes float-reverse {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(12px) rotate(-2deg); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-float-reverse { animation: float-reverse 5s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
+.animate-blob { animation: blob 8s ease-in-out infinite; }
