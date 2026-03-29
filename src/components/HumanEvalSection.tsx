@@ -12,8 +12,10 @@ interface Trial {
   modelA: string;
   modelB: string;
   benchmarkPreference: "A" | "B";
-  /** Tailwind aspect class for the video frame; default 16:9 (`aspect-video`). */
+  /** Tailwind aspect class for the video frame; default 16:9 (`aspect-video`). Ignored when `intrinsicVideo` is true. */
   videoAspectClass?: string;
+  /** Use source aspect ratio in-layout (no cropped cover box, no letterboxing from a fixed aspect wrapper). */
+  intrinsicVideo?: boolean;
 }
 
 /** Paired clips under public/user_study_video/study_* — filenames mark model (e.g. kling-ai-kling-v2-6) and better/worse vs expert preference. */
@@ -22,14 +24,14 @@ const trials: Trial[] = [
     id: 1,
     question:
       "Which clip keeps MiloFinch’s character appearance more consistent and on-model?",
-    optionA: "I prefer the left clip for appearance consistency.",
-    optionB: "I prefer the right clip for appearance consistency.",
-    videoA: "/user_study_video/study_1/worse_google-veo3-1_MiloFinch_appearance_1080p_16x7_pad_white.mp4",
-    videoB: "/user_study_video/study_1/better_bytedance-seedance-pro_MiloFinch_appearance_1080p_16x7_pad_white.mp4",
+    optionA: "Prefer the left clip for appearance.",
+    optionB: "Prefer the right clip for appearance.",
+    videoA: "/user_study_video/study_1/worse_google-veo3-1_MiloFinch_appearance.mp4",
+    videoB: "/user_study_video/study_1/better_bytedance-seedance-pro_MiloFinch_appearance_1280x720_pad_white.mp4",
     modelA: "Veo 3.1",
     modelB: "Seedance Pro",
     benchmarkPreference: "B",
-    videoAspectClass: "aspect-[16/7]",
+    intrinsicVideo: true,
   },
   {
     id: 2,
@@ -125,7 +127,7 @@ const HumanEvalSection = () => {
           </p>
           <p className="text-center font-display text-xl font-semibold mb-8">{trial.question}</p>
 
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid min-w-0 md:grid-cols-2 gap-4 md:items-start">
             {(["A", "B"] as const).map((side) => {
               const isSelected = userChoice === side;
               const isBenchmark = revealed && trial.benchmarkPreference === side;
@@ -136,7 +138,7 @@ const HumanEvalSection = () => {
                   key={side}
                   onClick={() => handleSelect(side)}
                   disabled={revealed}
-                  className={`relative rounded-xl overflow-hidden border-2 transition-all text-left ${
+                  className={`relative min-w-0 rounded-xl overflow-hidden border-2 transition-all text-left ${
                     revealed
                       ? isBenchmark
                         ? "border-mint bg-mint/10 shadow-lg"
@@ -149,10 +151,20 @@ const HumanEvalSection = () => {
                   whileTap={!revealed ? { scale: 0.98 } : {}}
                 >
                   {/* Video area */}
-                  <div className={`${trial.videoAspectClass ?? "aspect-video"} bg-muted/50 relative overflow-hidden`}>
+                  <div
+                    className={
+                      trial.intrinsicVideo
+                        ? "w-full min-w-0 overflow-hidden rounded-t-xl bg-muted/50 relative isolate"
+                        : `${trial.videoAspectClass ?? "aspect-video"} bg-muted/50 relative overflow-hidden`
+                    }
+                  >
                     <video
                       src={videoSrc}
-                      className="w-full h-full object-cover"
+                      className={
+                        trial.intrinsicVideo
+                          ? "block w-full min-w-0 max-w-full h-auto align-middle"
+                          : "w-full h-full object-cover"
+                      }
                       autoPlay
                       loop
                       muted
@@ -161,13 +173,6 @@ const HumanEvalSection = () => {
                         (e.target as HTMLVideoElement).style.display = 'none';
                       }}
                     />
-                    {/* Placeholder overlay when video not loaded */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40 pointer-events-none">
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-2">
-                        <polygon points="5 3 19 12 5 21 5 3" />
-                      </svg>
-                      <span className="text-xs font-display">Video {side}</span>
-                    </div>
                     {/* Model name badge - hidden until revealed */}
                     {revealed && (
                       <motion.div
@@ -180,9 +185,15 @@ const HumanEvalSection = () => {
                     )}
                   </div>
 
-                  <div className="p-5">
+                  <div className="p-5 min-w-0">
                     <span className="text-xs font-display font-bold text-muted-foreground mb-2 block">Option {side}</span>
-                    <p className="font-body text-sm">{side === "A" ? trial.optionA : trial.optionB}</p>
+                    <p
+                      className={`font-body text-sm hyphens-none ${
+                        trial.intrinsicVideo ? "md:whitespace-nowrap" : ""
+                      }`}
+                    >
+                      {side === "A" ? trial.optionA : trial.optionB}
+                    </p>
                   </div>
 
                   {/* Badges */}
