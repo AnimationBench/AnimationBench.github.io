@@ -12,52 +12,47 @@ interface Trial {
   modelA: string;
   modelB: string;
   benchmarkPreference: "A" | "B";
+  /** Tailwind aspect class for the video frame; default 16:9 (`aspect-video`). */
+  videoAspectClass?: string;
 }
 
+/** Paired clips under public/user_study_video/study_* — filenames mark model (e.g. kling-ai-kling-v2-6) and better/worse vs expert preference. */
 const trials: Trial[] = [
   {
     id: 1,
-    question: "Which video better preserves IP appearance consistency during a 360° rotation?",
-    optionA: "Character maintains canonical visual features across views",
-    optionB: "Character appearance drifts significantly during rotation",
-    videoA: "/videos/trial1_a.mp4",
-    videoB: "/videos/trial1_b.mp4",
-    modelA: "Sora2-Pro",
-    modelB: "HunyuanVideo",
-    benchmarkPreference: "A",
+    question:
+      "Which clip keeps MiloFinch’s character appearance more consistent and on-model?",
+    optionA: "I prefer the left clip for appearance consistency.",
+    optionB: "I prefer the right clip for appearance consistency.",
+    videoA: "/user_study_video/study_1/worse_google-veo3-1_MiloFinch_appearance_1080p_16x7_pad_white.mp4",
+    videoB: "/user_study_video/study_1/better_bytedance-seedance-pro_MiloFinch_appearance_1080p_16x7_pad_white.mp4",
+    modelA: "Veo 3.1",
+    modelB: "Seedance Pro",
+    benchmarkPreference: "B",
+    videoAspectClass: "aspect-[16/7]",
   },
   {
     id: 2,
-    question: "Which output better demonstrates anticipation before the main action?",
-    optionA: "Clear preparatory motion (crouch before jump)",
-    optionB: "Action starts abruptly without anticipation",
-    videoA: "/videos/trial2_a.mp4",
-    videoB: "/videos/trial2_b.mp4",
-    modelA: "Veo3.1",
-    modelB: "Framepack",
+    question: "Which clip shows clearer animation anticipation before Patrick’s main action?",
+    optionA: "I prefer the left clip for anticipation timing.",
+    optionB: "I prefer the right clip for anticipation timing.",
+    videoA: "/user_study_video/study_2/better_kling-ai-kling-v2-6_patrick_anticipation.mp4",
+    videoB: "/user_study_video/study_2/worse_bytedance-seedance-pro_patrick_anticipation.mp4",
+    modelA: "Kling v2.6",
+    modelB: "Seedance Pro",
     benchmarkPreference: "A",
   },
   {
     id: 3,
-    question: "Which video shows better squash-and-stretch deformation quality?",
-    optionA: "Controlled area preservation during impact/rebound",
-    optionB: "Area changes inconsistently, breaking volume illusion",
-    videoA: "/videos/trial3_a.mp4",
-    videoB: "/videos/trial3_b.mp4",
-    modelA: "Seedance-Pro",
-    modelB: "Wan2.2",
-    benchmarkPreference: "A",
-  },
-  {
-    id: 4,
-    question: "Which model better maintains semantic consistency with the prompt?",
-    optionA: "Object types, actions, and scene match prompt accurately",
-    optionB: "Multiple semantic mismatches (wrong objects/colors)",
-    videoA: "/videos/trial4_a.mp4",
-    videoB: "/videos/trial4_b.mp4",
-    modelA: "Kling2.6",
-    modelB: "HunyuanVideo",
-    benchmarkPreference: "A",
+    question:
+      "Which cartoon-ball clip has more convincing motion and cartoon-style appeal (same seed; different models)?",
+    optionA: "I prefer the left clip for motion and style.",
+    optionB: "I prefer the right clip for motion and style.",
+    videoA: "/user_study_video/study_3/worse_google-veo3-1_cartoon_ball_000_seed114514.mp4",
+    videoB: "/user_study_video/study_3/better_bytedance-seedance-pro_cartoon_ball_000_seed114514_1.mp4",
+    modelA: "Veo 3.1",
+    modelB: "Seedance Pro",
+    benchmarkPreference: "B",
   },
 ];
 
@@ -104,7 +99,8 @@ const HumanEvalSection = () => {
             🧑‍⚖️ Human <span className="text-gradient">Alignment</span> Study
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Simulating the paper's human preference study: annotators compared paired outputs from four closed-source models using win-ratio metrics. AnimationBench scores show strong Spearman correlation with human judgments.
+            Three blind paired comparisons from our human alignment study: pick the stronger clip, then we reveal which model produced each side. Bundled study videos use filenames (<span className="whitespace-nowrap">better_*</span> /{" "}
+            <span className="whitespace-nowrap">worse_*</span>) for generator ids and reference preference; AnimationBench scores aim to track these judgments at scale.
           </p>
         </motion.div>
 
@@ -153,7 +149,7 @@ const HumanEvalSection = () => {
                   whileTap={!revealed ? { scale: 0.98 } : {}}
                 >
                   {/* Video area */}
-                  <div className="aspect-video bg-muted/50 relative overflow-hidden">
+                  <div className={`${trial.videoAspectClass ?? "aspect-video"} bg-muted/50 relative overflow-hidden`}>
                     <video
                       src={videoSrc}
                       className="w-full h-full object-cover"
