@@ -41,6 +41,53 @@ const mediaItems = [
   { id: 44, title: "Studio Ghibli Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Studio Ghibli2.png" },
 ];
 
+const comparisonVideos = [
+  {
+    id: "seedance-pro",
+    model: "Seedance-Pro",
+    media: "/compare_video/bytedance-seedance-pro_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
+  },
+  {
+    id: "framepack",
+    model: "Framepack",
+    media: "/compare_video/framepack_Chomp_action.mp4",
+  },
+  {
+    id: "veo-3-1",
+    model: "Veo 3.1",
+    media: "/compare_video/google-veo3-1_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
+  },
+  {
+    id: "hunyuan-video",
+    model: "HunyuanVideo",
+    media: "/compare_video/hunyuan_i2v_Chomp_action.mp4",
+  },
+  {
+    id: "kling-2-6",
+    model: "Kling 2.6",
+    media: "/compare_video/kling-ai-kling-v2-6_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
+  },
+  {
+    id: "sora-2-pro",
+    model: "Sora 2 Pro",
+    media: "/compare_video/sora-sora-2-pro_Chomp_scene_actions_show_environment_interaction_clearly_simple_3.mp4",
+  },
+  {
+    id: "wan-2-2",
+    model: "Wan 2.2",
+    media: "/compare_video/wan2.2_Chomp_action.mp4",
+  },
+];
+
+const comparisonVideoRows = [
+  comparisonVideos.filter((video) =>
+    ["seedance-pro", "veo-3-1", "kling-2-6", "sora-2-pro"].includes(video.id)
+  ),
+  comparisonVideos.filter((video) =>
+    ["framepack", "hunyuan-video", "wan-2-2"].includes(video.id)
+  ),
+];
+
 const typeColors: Record<string, string> = {
   video: "bg-coral/20 text-coral",
   image: "bg-mint/20 text-mint",
@@ -165,6 +212,63 @@ const GallerySection = () => {
               </motion.div>
             ))}
           </AnimatePresence>
+        </motion.div>
+
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">
+              Cross-Model <span className="text-gradient">Visual Comparison</span>
+            </h3>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              The same Chomp prompt: Shark Chomp plays with a blue and yellow striped ball, with a small brown box nearby.
+            </p>
+          </div>
+
+          <div className="space-y-5">
+            {comparisonVideoRows.map((row, rowIndex) => (
+              <div
+                key={`row-${rowIndex}`}
+                className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"
+              >
+                {row.map((video) => (
+                  <div
+                    key={video.id}
+                    className="glass-card overflow-hidden rounded-2xl border border-border/50 shadow-sm"
+                  >
+                    <div className="relative aspect-square bg-black">
+                      <video
+                        src={video.media}
+                        className="h-full w-full object-cover"
+                        controls
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                      />
+                      <div className="absolute left-3 top-3">
+                        <span className="rounded-full bg-black/65 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                          {video.model}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="p-4">
+                      <p className="text-center font-display font-semibold text-sm md:text-base">
+                        {video.model}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {/* Image Preview Dialog */}
