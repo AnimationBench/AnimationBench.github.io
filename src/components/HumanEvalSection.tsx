@@ -12,49 +12,52 @@ interface Trial {
   modelA: string;
   modelB: string;
   benchmarkPreference: "A" | "B";
-  /** Tailwind aspect class for the video frame; default 16:9 (`aspect-video`). Ignored when `intrinsicVideo` is true. */
-  videoAspectClass?: string;
-  /** Use source aspect ratio in-layout (no cropped cover box, no letterboxing from a fixed aspect wrapper). */
-  intrinsicVideo?: boolean;
 }
 
-/** Paired clips under public/user_study_video/study_* — filenames mark model (e.g. kling-ai-kling-v2-6) and better/worse vs expert preference. */
 const trials: Trial[] = [
   {
     id: 1,
-    question:
-      "Which clip keeps MiloFinch’s character appearance more consistent and on-model?",
-    optionA: "Prefer the left clip for appearance.",
-    optionB: "Prefer the right clip for appearance.",
-    videoA: "/user_study_video/study_1/worse_google-veo3-1_MiloFinch_appearance.mp4",
-    videoB: "/user_study_video/study_1/better_bytedance-seedance-pro_MiloFinch_appearance_1280x720_pad_white.mp4",
-    modelA: "Veo 3.1",
-    modelB: "Seedance Pro",
-    benchmarkPreference: "B",
-    intrinsicVideo: true,
+    question: "Which video better preserves IP appearance consistency during a 360° rotation?",
+    optionA: "Character maintains canonical visual features across views",
+    optionB: "Character appearance drifts significantly during rotation",
+    videoA: "/videos/trial1_a.mp4",
+    videoB: "/videos/trial1_b.mp4",
+    modelA: "Sora2-Pro",
+    modelB: "HunyuanVideo",
+    benchmarkPreference: "A",
   },
   {
     id: 2,
-    question: "Which clip shows clearer animation anticipation before Patrick’s main action?",
-    optionA: "I prefer the left clip for anticipation timing.",
-    optionB: "I prefer the right clip for anticipation timing.",
-    videoA: "/user_study_video/study_2/better_kling-ai-kling-v2-6_patrick_anticipation.mp4",
-    videoB: "/user_study_video/study_2/worse_bytedance-seedance-pro_patrick_anticipation.mp4",
-    modelA: "Kling v2.6",
-    modelB: "Seedance Pro",
+    question: "Which output better demonstrates anticipation before the main action?",
+    optionA: "Clear preparatory motion (crouch before jump)",
+    optionB: "Action starts abruptly without anticipation",
+    videoA: "/videos/trial2_a.mp4",
+    videoB: "/videos/trial2_b.mp4",
+    modelA: "Veo3.1",
+    modelB: "Framepack",
     benchmarkPreference: "A",
   },
   {
     id: 3,
-    question:
-      "Which cartoon-ball clip has more convincing motion and cartoon-style appeal (same seed; different models)?",
-    optionA: "I prefer the left clip for motion and style.",
-    optionB: "I prefer the right clip for motion and style.",
-    videoA: "/user_study_video/study_3/worse_google-veo3-1_cartoon_ball_000_seed114514.mp4",
-    videoB: "/user_study_video/study_3/better_bytedance-seedance-pro_cartoon_ball_000_seed114514_1.mp4",
-    modelA: "Veo 3.1",
-    modelB: "Seedance Pro",
-    benchmarkPreference: "B",
+    question: "Which video shows better squash-and-stretch deformation quality?",
+    optionA: "Controlled area preservation during impact/rebound",
+    optionB: "Area changes inconsistently, breaking volume illusion",
+    videoA: "/videos/trial3_a.mp4",
+    videoB: "/videos/trial3_b.mp4",
+    modelA: "Seedance-Pro",
+    modelB: "Wan2.2",
+    benchmarkPreference: "A",
+  },
+  {
+    id: 4,
+    question: "Which model better maintains semantic consistency with the prompt?",
+    optionA: "Object types, actions, and scene match prompt accurately",
+    optionB: "Multiple semantic mismatches (wrong objects/colors)",
+    videoA: "/videos/trial4_a.mp4",
+    videoB: "/videos/trial4_b.mp4",
+    modelA: "Kling2.6",
+    modelB: "HunyuanVideo",
+    benchmarkPreference: "A",
   },
 ];
 
@@ -101,8 +104,7 @@ const HumanEvalSection = () => {
             🧑‍⚖️ Human <span className="text-gradient">Alignment</span> Study
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Three blind paired comparisons from our human alignment study: pick the stronger clip, then we reveal which model produced each side. Bundled study videos use filenames (<span className="whitespace-nowrap">better_*</span> /{" "}
-            <span className="whitespace-nowrap">worse_*</span>) for generator ids and reference preference; AnimationBench scores aim to track these judgments at scale.
+            Simulating the paper's human preference study: annotators compared paired outputs from four closed-source models using win-ratio metrics. AnimationBench scores show strong Spearman correlation with human judgments.
           </p>
         </motion.div>
 
@@ -127,7 +129,7 @@ const HumanEvalSection = () => {
           </p>
           <p className="text-center font-display text-xl font-semibold mb-8">{trial.question}</p>
 
-          <div className="grid min-w-0 md:grid-cols-2 gap-4 md:items-start">
+          <div className="grid md:grid-cols-2 gap-4">
             {(["A", "B"] as const).map((side) => {
               const isSelected = userChoice === side;
               const isBenchmark = revealed && trial.benchmarkPreference === side;
@@ -138,7 +140,7 @@ const HumanEvalSection = () => {
                   key={side}
                   onClick={() => handleSelect(side)}
                   disabled={revealed}
-                  className={`relative min-w-0 rounded-xl overflow-hidden border-2 transition-all text-left ${
+                  className={`relative rounded-xl overflow-hidden border-2 transition-all text-left ${
                     revealed
                       ? isBenchmark
                         ? "border-mint bg-mint/10 shadow-lg"
@@ -151,20 +153,10 @@ const HumanEvalSection = () => {
                   whileTap={!revealed ? { scale: 0.98 } : {}}
                 >
                   {/* Video area */}
-                  <div
-                    className={
-                      trial.intrinsicVideo
-                        ? "w-full min-w-0 overflow-hidden rounded-t-xl bg-muted/50 relative isolate"
-                        : `${trial.videoAspectClass ?? "aspect-video"} bg-muted/50 relative overflow-hidden`
-                    }
-                  >
+                  <div className="aspect-video bg-muted/50 relative overflow-hidden">
                     <video
                       src={videoSrc}
-                      className={
-                        trial.intrinsicVideo
-                          ? "block w-full min-w-0 max-w-full h-auto align-middle"
-                          : "w-full h-full object-cover"
-                      }
+                      className="w-full h-full object-cover"
                       autoPlay
                       loop
                       muted
@@ -173,6 +165,13 @@ const HumanEvalSection = () => {
                         (e.target as HTMLVideoElement).style.display = 'none';
                       }}
                     />
+                    {/* Placeholder overlay when video not loaded */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground/40 pointer-events-none">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="mb-2">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                      </svg>
+                      <span className="text-xs font-display">Video {side}</span>
+                    </div>
                     {/* Model name badge - hidden until revealed */}
                     {revealed && (
                       <motion.div
@@ -185,15 +184,9 @@ const HumanEvalSection = () => {
                     )}
                   </div>
 
-                  <div className="p-5 min-w-0">
+                  <div className="p-5">
                     <span className="text-xs font-display font-bold text-muted-foreground mb-2 block">Option {side}</span>
-                    <p
-                      className={`font-body text-sm hyphens-none ${
-                        trial.intrinsicVideo ? "md:whitespace-nowrap" : ""
-                      }`}
-                    >
-                      {side === "A" ? trial.optionA : trial.optionB}
-                    </p>
+                    <p className="font-body text-sm">{side === "A" ? trial.optionA : trial.optionB}</p>
                   </div>
 
                   {/* Badges */}

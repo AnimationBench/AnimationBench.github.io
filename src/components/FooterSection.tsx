@@ -40,9 +40,6 @@ const FooterSection = () => {
           </a>
         </div>
 
-        <p className="text-center text-xs text-muted-foreground">
-          Made with 💖 for the research community
-        </p>
       </div>
     </footer>
   );

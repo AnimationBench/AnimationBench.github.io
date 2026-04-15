@@ -10,14 +10,14 @@ const chartOptions = [
     title: "Overall Radar Comparison",
     description: "Model Comparison",
     src: "/paper-assets/radar_chart_combined.png",
-    aspectRatio: "6395/2929",
+    aspectRatio: "6690/2583",
   },
   {
     id: "separate",
     title: "Per-model Dimension Profiles",
     description: "19-Dim Radar",
     src: "/paper-assets/radar_chart_separate_oneline.png",
-    aspectRatio: "8293/1156",
+    aspectRatio: "9411/1094",
   },
   {
     id: "alignment",
@@ -48,6 +48,7 @@ const models = [
   { name: "Veo3.1", color: "#5eaed6", scores: [72.02, 84.72, 91.61, 89.31, 64.76, 39.29, 75.00, 11.43], group: "Proprietary" },
   { name: "Kling2.6", color: "#d4c25a", scores: [74.09, 83.33, 91.61, 86.11, 72.64, 92.86, 81.67, 18.31], group: "Proprietary" },
   { name: "Seedance-Pro", color: "#f28cab", scores: [74.61, 78.24, 90.91, 69.86, 67.25, 57.14, 88.33, 12.50], group: "Proprietary" },
+  { name: "Seedance2.0", color: "#48c9b0", scores: [75.83, 78.44, 88.33, 89.05, 69.43, 96.42, 89.73, 19.58], group: "Proprietary" },
 ];
 
 const groups = ["All Models", "Proprietary Models", "Open-Source Models"];
@@ -75,7 +76,7 @@ const BenchmarkSection = () => {
       <div className="container max-w-6xl">
         <motion.div className="text-center mb-12" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-            Real Table <span className="text-gradient">Scores</span>
+            Model <span className="text-gradient">Scores</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             Scores are from Table "AnimationBench Overall Evaluation Results" in the paper.
@@ -249,12 +250,8 @@ const BenchmarkSection = () => {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="bg-background overflow-hidden cursor-pointer" style={{ aspectRatio: chart.aspectRatio }} onClick={() => setPreviewImage({ src: chart.src, alt: chart.title })}>
-                    <img
-                      src={chart.src}
-                      alt={chart.title}
-                      className="h-full w-full object-contain"
-                    />
-                  </div>
+                      <img src={chart.src} alt={chart.title} className="h-full w-full object-contain" />
+                    </div>
                   <div className="p-4">
                     <h4 className="font-display font-semibold text-sm mb-2">{chart.title}</h4>
                     <p className="text-xs text-muted-foreground">{chart.description}</p>

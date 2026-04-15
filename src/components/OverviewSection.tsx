@@ -11,23 +11,23 @@ const taxonomy = [
     description: "Ensures that generated characters maintain their visual identity, signature behaviours, and personality across different prompts and scenes.",
     children: ["Appearance Consistency", "Behavior Consistency", "Personality Consistency"],
     tags: {
-      "Appearance Consistency": ["Canonical visual identity", "Multi-view consistency", "Stability under motion"],
+      "Appearance Consistency": ["360 rotation consistency", "Large-motion consistency"],
       "Behavior Consistency": ["Signature traits", "Environmental interaction", "Action logic"],
       "Personality Consistency": ["Facial acting", "Posture and attitude", "Presence and body language"],
     },
   },
   {
     id: "anim",
-    label: "Animation Principles",
+    label: "Disney's 12 Animation Principles",
     icon: Clapperboard,
     color: "lavender" as const,
-    description: "Evaluates classical animation quality through motion, deformation, expressiveness, and human-judged preference.",
+    description: "Evaluates classical animation quality through motion dynamics, deformation, expressiveness, and human-judged preference based on Disney's 12 principles.",
     children: ["Motion Dynamics", "Deformation", "Expressiveness", "Human Preference"],
     tags: {
-      "Motion Dynamics": ["Anticipation", "Follow Through", "Slow In/Out"],
-      Deformation: ["Squash & Stretch"],
-      Expressiveness: ["Distinctive Content", "Novelty", "Solid Drawing"],
-      "Human Preference": ["Dynamic Degree", "Diversity", "Semantic Extension"],
+      "Motion Dynamics": ["Arc & Secondary Action", "Slow In and Slow Out", "Anticipation", "Follow Through and Overlapping Action"],
+      Deformation: ["Squash and Stretch"],
+      Expressiveness: ["Exaggeration", "Solid Drawing"],
+      "Human Preference": ["Appeal"],
     },
   },
   {
@@ -38,13 +38,12 @@ const taxonomy = [
     description: "Captures semantic fidelity, motion rationality, and camera behaviour beyond character-centric animation.",
     children: ["Semantic Consistency", "Motion Rationality", "Camera Motion Consistency"],
     tags: {
-      "Semantic Consistency": ["Object", "Action", "Color", "Scene"],
-      "Motion Rationality": ["Structural Integrity", "Motion Coherence", "Action Plausibility", "Environment Fit"],
-      "Camera Motion Consistency": ["Pan", "Tilt", "Zoom", "Static"],
+      "Semantic Consistency": ["Object Types", "Actions", "Color Schemes", "Scene Depiction"],
+      "Motion Rationality": [],
+      "Camera Motion Consistency": [],
     },
   },
 ];
-
 const metaChips = ["19 dimensions", "Close-set + open-set", "VLM-based evaluation"];
 
 const colorAccent: Record<string, { bg: string; border: string; text: string; pill: string }> = {
@@ -117,7 +116,7 @@ const OverviewSection = () => {
                   className="w-full h-full object-cover"
                   controls
                   preload="metadata"
-                  src="https://cdn-dev.newai.land/audios/827ea15b-3e39-4494-bafb-4db2f5ceb20e.mp4"
+                  src="https://cdn-dev.newai.land/audios/1e4b1e0c-0b36-43a3-ac4c-f341cbe05315.mp4"
                 />
               </div>
             </div>

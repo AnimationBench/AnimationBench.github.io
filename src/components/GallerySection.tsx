@@ -23,6 +23,11 @@ const mediaItems = [
   { id: 25, title: "Ignis The Armored Wyrm - Framepack", category: "Videos", type: "video", model: "Framepack", character: "IgnisTheArmoredWyrm", dimension: "Action", source: "anibench_dataset/framepack", media: "/dataset-videos/framepack_IgnisTheArmoredWyrm_action.mp4" },
   { id: 26, title: "Obsidian - Framepack", category: "Videos", type: "video", model: "Framepack", character: "Obsidian", dimension: "Action", source: "anibench_dataset/framepack", media: "/dataset-videos/framepack_Obsidian_action.mp4" },
   { id: 48, title: "Cartoon Ball Video - Framepack", category: "Videos", type: "video", model: "Framepack", character: "Cartoon Ball", dimension: "Squash & Stretch", source: "roll_ball_output/videos", media: "/dataset-videos/framepack_cartoon_ball_000_seed114514.mp4" },
+  { id: 49, title: "Crabby - Seedance2.0", category: "Videos", type: "video", model: "Seedance2.0", character: "Crabby", dimension: "Action", source: "anibench_dataset/seedance2.0", media: "/dataset-videos/seedance2.0_Crabby_action.mp4" },
+  { id: 50, title: "Gerry The Giraffe - Seedance2.0", category: "Videos", type: "video", model: "Seedance2.0", character: "GerryTheGiraffe", dimension: "Action", source: "anibench_dataset/seedance2.0", media: "/dataset-videos/seedance2.0_GerryTheGiraffe_action.mp4" },
+  { id: 51, title: "Pip The Pebble - Seedance2.0", category: "Videos", type: "video", model: "Seedance2.0", character: "PipThePebble", dimension: "Action", source: "anibench_dataset/seedance2.0", media: "/dataset-videos/seedance2.0_PipThePebble_action.mp4" },
+  { id: 52, title: "Professor Snout - Seedance2.0", category: "Videos", type: "video", model: "Seedance2.0", character: "ProfessorSnout", dimension: "Action", source: "anibench_dataset/seedance2.0", media: "/dataset-videos/seedance2.0_ProfessorSnout_action.mp4" },
+  { id: 53, title: "Pip The Pebble (MR) - Seedance2.0", category: "Videos", type: "video", model: "Seedance2.0", character: "PipThePebble", dimension: "Motion Rationality", source: "anibench_dataset/seedance2.0", media: "/dataset-videos/seedance2.0_PipThePebble_motion_rationality.mp4" },
   // 15 sample characters (partial)
   { id: 29, title: "Biomimetic Robot", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Robot", dimension: "3D Style", source: "IP_can_be_used", media: "/ip-characters/A_boimimetic_robot,_with_complex_structure_and_circuits._3D_style,_in_cartoon_movie_style._0.png" },
   { id: 30, title: "British Shorthair Cat", category: "Characters (partial)", type: "image", model: "IP Suite", character: "British Shorthair", dimension: "3D Style", source: "IP_can_be_used", media: "/ip-characters/british-shorthair-foxy.png" },
@@ -31,61 +36,14 @@ const mediaItems = [
   { id: 33, title: "Spider Robot", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Spider Robot", dimension: "3D Style", source: "IP_can_be_used", media: "/ip-characters/araneid-robot-camera-eyes.png" },
   { id: 34, title: "Animated Shark", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Shark", dimension: "3D Style", source: "IP_can_be_used", media: "/ip-characters/An_animated_shark_with_sharp_teeth_and_two_feet_and_long_leg_is_smiling._0.png" },
   { id: 35, title: "Cartoon Owl", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Owl", dimension: "3D Style", source: "IP_can_be_used", media: "/ip-characters/Create_a_cartoon_owl_character,_in_dark_brown_color,_with_adorable_expression,_is_running_on_the_ground._3D_style,_plain_background._0.png" },
-  { id: 36, title: "80s Retro Anime Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/80s Retro Anime2.png" },
-  { id: 37, title: "Classic French Animation", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Classic French Animation.png" },
-  { id: 38, title: "Disney Renaissance Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Disney Renaissance Animation2.png" },
-  { id: 39, title: "Golden Age American Animation", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Golden Age of American Animation.png" },
-  { id: 41, title: "Limited Animation Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Limited Animation.png" },
-  { id: 42, title: "Limited Animation Style 2", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Limited Animation2.png" },
-  { id: 43, title: "Modern CalArts Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Modern CalArts Animation2.png" },
-  { id: 44, title: "Studio Ghibli Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Studio Ghibli2.png" },
-];
-
-const comparisonVideos = [
-  {
-    id: "seedance-pro",
-    model: "Seedance-Pro",
-    media: "/compare_video/bytedance-seedance-pro_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
-  },
-  {
-    id: "framepack",
-    model: "Framepack",
-    media: "/compare_video/framepack_Chomp_action.mp4",
-  },
-  {
-    id: "veo-3-1",
-    model: "Veo 3.1",
-    media: "/compare_video/google-veo3-1_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
-  },
-  {
-    id: "hunyuan-video",
-    model: "HunyuanVideo",
-    media: "/compare_video/hunyuan_i2v_Chomp_action.mp4",
-  },
-  {
-    id: "kling-2-6",
-    model: "Kling 2.6",
-    media: "/compare_video/kling-ai-kling-v2-6_Chomp_scene_actions_show_environment_interaction_clearly.mp4",
-  },
-  {
-    id: "sora-2-pro",
-    model: "Sora 2 Pro",
-    media: "/compare_video/sora-sora-2-pro_Chomp_scene_actions_show_environment_interaction_clearly_simple_3.mp4",
-  },
-  {
-    id: "wan-2-2",
-    model: "Wan 2.2",
-    media: "/compare_video/wan2.2_Chomp_action.mp4",
-  },
-];
-
-const comparisonVideoRows = [
-  comparisonVideos.filter((video) =>
-    ["seedance-pro", "veo-3-1", "kling-2-6", "sora-2-pro"].includes(video.id)
-  ),
-  comparisonVideos.filter((video) =>
-    ["framepack", "hunyuan-video", "wan-2-2"].includes(video.id)
-  ),
+  { id: 36, title: "80s Retro Anime Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/80s-Retro-Anime2.png" },
+  { id: 37, title: "Classic French Animation", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Classic-French-Animation.png" },
+  { id: 38, title: "Disney Renaissance Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Disney-Renaissance-Animation2.png" },
+  { id: 39, title: "Golden Age American Animation", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Golden-Age-of-American-Animation.png" },
+  { id: 41, title: "Limited Animation Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Limited-Animation.png" },
+  { id: 42, title: "Limited Animation Style 2", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Limited-Animation2.png" },
+  { id: 43, title: "Modern CalArts Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Modern-CalArts-Animation2.png" },
+  { id: 44, title: "Studio Ghibli Style", category: "Characters (partial)", type: "image", model: "IP Suite", character: "Style Reference", dimension: "Animation Style", source: "IP_can_be_used", media: "/ip-characters/Studio-Ghibli2.png" },
 ];
 
 const typeColors: Record<string, string> = {
@@ -212,63 +170,6 @@ const GallerySection = () => {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
-
-        <motion.div
-          className="mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-display font-bold mb-3">
-              Cross-Model <span className="text-gradient">Visual Comparison</span>
-            </h3>
-            <p className="text-muted-foreground max-w-3xl mx-auto">
-              The same Chomp prompt: Shark Chomp plays with a blue and yellow striped ball, with a small brown box nearby.
-            </p>
-          </div>
-
-          <div className="space-y-5">
-            {comparisonVideoRows.map((row, rowIndex) => (
-              <div
-                key={`row-${rowIndex}`}
-                className="grid gap-5 md:grid-cols-2 xl:grid-cols-4"
-              >
-                {row.map((video) => (
-                  <div
-                    key={video.id}
-                    className="glass-card overflow-hidden rounded-2xl border border-border/50 shadow-sm"
-                  >
-                    <div className="relative aspect-square bg-black">
-                      <video
-                        src={video.media}
-                        className="h-full w-full object-cover"
-                        controls
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                      />
-                      <div className="absolute left-3 top-3">
-                        <span className="rounded-full bg-black/65 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">
-                          {video.model}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="p-4">
-                      <p className="text-center font-display font-semibold text-sm md:text-base">
-                        {video.model}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
         </motion.div>
 
         {/* Image Preview Dialog */}

@@ -6,8 +6,8 @@ const findings = [
     icon: Medal,
     title: "Overall Ranking",
     value: "#1",
-    unit: "Kling2.6",
-    desc: "Across all 19 dimensions, Kling2.6 ranks first overall, followed by Veo3.1 and Seedance-Pro. Commercial models consistently outperform open-source alternatives.",
+    unit: "Seedance2.0",
+    desc: "Across all 8 key dimensions, Seedance2.0 ranks first overall, followed by Kling2.6 and Seedance-Pro. Commercial models consistently outperform open-source alternatives.",
     color: "coral",
   },
   {
@@ -23,7 +23,7 @@ const findings = [
     title: "Open vs Closed Source",
     value: "20+pt",
     unit: "avg gap",
-    desc: "Closed-source models (Kling2.6, Veo3.1) lead open-source (Wan2.2, HunyuanVideo) by 20+ points on average. Wan2.2 is the strongest open-source option but still lags on motion and semantics.",
+    desc: "Closed-source models (Seedance2.0, Kling2.6) lead open-source (Wan2.2, HunyuanVideo) by 20+ points on average. Wan2.2 is the strongest open-source option but still lags on motion and semantics.",
     color: "mint",
   },
   {
@@ -39,7 +39,7 @@ const findings = [
     title: "Standout Specialists",
     value: "3",
     unit: "models",
-    desc: "Seedance-Pro leads Dynamic Degree (88.33); Veo3.1 excels in semantic consistency and IP personality; Kling2.6 dominates camera and motion quality—each model has a distinct strength profile.",
+    desc: "Seedance2.0 leads Dynamic Degree (89.73) and Camera Motion Consistency (96.42); Veo3.1 excels in semantic consistency and IP personality; Kling2.6 dominates motion rationality—each model has a distinct strength profile.",
     color: "sky",
   },
   {
