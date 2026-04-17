@@ -3,9 +3,8 @@ import { FileText, Database, Play, Code, Eye, FlaskConical, Github, Globe } from
 import { Button } from "@/components/ui/button";
 
 const buttons = [
-  { label: "PDF", icon: FileText, variant: "default" as const, href: "/paper-assets/animationbench.pdf" },
-  { label: "GitHub", icon: Github, variant: "outline" as const, href: "https://github.com/VideoVerses/AnimationBench" },
   { label: "Paper", icon: Globe, variant: "outline" as const, href: "https://arxiv.org/abs/2604.15299", target: "_blank" },
+  { label: "GitHub", icon: Github, variant: "outline" as const, href: "https://github.com/VideoVerses/AnimationBench" },
   { label: "Key Findings", icon: Play, variant: "outline" as const, href: "#results" },
   { label: "Model Scores", icon: Code, variant: "outline" as const, href: "#benchmark" },
   { label: "Evaluation Protocol", icon: FlaskConical, variant: "outline" as const, href: "#method" },
