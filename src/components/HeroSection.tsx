@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FileText, Database, Play, Code, Eye, FlaskConical, Github } from "lucide-react";
+import { FileText, Database, Play, Code, Eye, FlaskConical, Github, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const buttons = [
