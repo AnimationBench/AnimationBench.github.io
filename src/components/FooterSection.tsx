@@ -14,15 +14,14 @@ const FooterSection = () => {
         <div className="glass-card rounded-2xl p-6 mb-10">
           <p className="font-display font-semibold text-sm mb-3 text-muted-foreground">📎 Citation</p>
           <pre className="text-xs text-muted-foreground bg-muted/50 rounded-xl p-4 overflow-x-auto font-body leading-relaxed">
-{`@article{wu2026animationbench,
-  title   = {AnimationBench: Are Video Models Good at
-             Character-Centric Animation?},
-  author  = {Leyi Wu and Pengjun Fang and Kai Sun and
-             Yazhou Xing and Yingqing He and Yinwei Wu and
-             Songsong Wang and Ziqi Huang and Dan Zhou and
-             Ying-Cong Chen and Qifeng Chen},
-  journal = {arXiv preprint arXiv:26XX.XXXXX},
-  year    = {2026}
+{`@misc{wu2026animationbenchvideomodelsgood,
+      title={AnimationBench: Are Video Models Good at Character-Centric Animation?}, 
+      author={Leyi Wu and Pengjun Fang and Kai Sun and Yazhou Xing and Yinwei Wu and Songsong Wang and Ziqi Huang and Dan Zhou and Yingqing He and Ying-Cong Chen and Qifeng Chen},
+      year={2026},
+      eprint={2604.15299},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2604.15299}, 
 }`}
           </pre>
         </div>
